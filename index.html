@@ -1,1 +1,23 @@
-<h1>hello</h1>
+<input id="image-file" type="file" onchange="SavePhoto(this)" >
+<br><br>
+Choose file and open chrome console > network tab to see the request details.
+<br><br>
+<small>Because in this example we send request to https://stacksnippets.net/upload/image the response code will be 404 ofcourse...</small>
+<script type="text/javascript">
+window.SavePhoto = async function SavePhoto(e) 
+{
+    let user = { name:'john', age:34 };
+    let formData = new FormData();
+    let photo = e.files[0];      
+         
+    formData.append("photo", photo);
+    formData.append("user", JSON.stringify(user));  
+    
+    try {
+       let r = await fetch('/upload', {method: "POST", body: formData}); 
+       console.log('HTTP response code:',r.status); 
+    } catch(e) {
+       console.log('Huston we have problem...:', e);
+    }
+    
+    }</script>
