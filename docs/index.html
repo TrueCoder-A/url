@@ -4,7 +4,7 @@
 {
     let formData = new FormData();           
     formData.append("file", inp.files[0]);
-    await fetch('/upload/somedata', {method: "POST", body: formData});    
+    await fetch('/upload', {method: "POST", body: formData});    
     alert('success');
 }
 
