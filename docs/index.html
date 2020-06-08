@@ -1,25 +1,11 @@
 <input type="file" onchange="saveFile(this)" >
-<br><br>
-Before selecting the file Open chrome console > network tab to see the request details.
-<br><br>
-<script>async function saveFile(){
-async function saveFile(inp) 
+<script type="text/javascript">
+	async function saveFile(inp) 
 {
-    let user = { name:'john', age:34 };
-    let formData = new FormData();
-    let photo = inp.files[0];      
-         
-    formData.append("photo", photo);
-    formData.append("user", JSON.stringify(user));  
-    
-    try {
-       let r = await fetch('/upload', {method: "POST", body: formData}); 
-       console.log('HTTP response code:',r.status); 
-       alert('success');
-    } catch(e) {
-       console.log('Huston we have problem...:', e);
-    }
-    
+    let formData = new FormData();           
+    formData.append("file", inp.files[0]);
+    await fetch('/upload/somedata', {method: "POST", body: formData});    
+    alert('success');
 }
 
-}</script>
+</script>
