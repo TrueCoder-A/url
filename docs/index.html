@@ -1,26 +1,19 @@
-    <form onSubmit="WriteToFile(this)">
-    <label>url?</label>
-    <input type="text" name="text" size="20">
-   
-    <label>filename</abel>
-    <input type="text" pattern="[a-zA-Z]+" oninvalid="setCustomValidity('Please enter alphabets only,no extension. ')"id="text" name="filename" id="lastName" size="20">     
-    <input type="submit" value="submit">
-   
+<input type="file">
+<script>
+const inputElement = document.querySelector('input[type=file]');
 
+// Listen for a file submit from user
+inputElement.addEventListener('change', () => {
+    const data = new FormData();
+    data.append('file', inputElement.files[0]);
+    data.append('imageName', 'flower');
 
+    // You can then post it to your server.
+    // Fetch can accept an object of type FormData on its  body
+    fetch('uploadImage', {
+        method: 'POST',
+        body: data
+    });
+});
 
-
-
-    <script type="text/javascript">
-    	    function WriteToFile(passForm) {
-     
-        set fso = CreateObject("Scripting.FileSystemObject"); 
-        var text = document.getElementById('text');
-        var filename  = document.getElementById('filename')+".txt";
-        set s   = fso.CreateTextFile("uploads/"+filename, True);
-        s.writeline(text); 
-            
-        s.Close();
-     }
-    	
-    </script>
+</script>
